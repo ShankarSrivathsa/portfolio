@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adukuri Shankar Srivathsa — AI/ML Student and Astrophysics Researcher. Editorial minimalist portfolio website.">
+  <title>Adukuri Shankar Srivathsa — Portfolio</title>
+  
+  <!-- Preconnecting to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. Core Design Tokens & System Resets
+       ========================================================================== */
+    :root {
+      --bg-color: #0c0c0c;
+      --text-color: #e5e5e3;
+      --accent-color: #ffffff;
+      --muted-color: #888888;
+      --root-stroke: rgba(255, 255, 255, 0.25);
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.16) #0c0c0c;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 300;
+      overflow: visible;
+    }
+
+    /* Custom Theme Scrollbar Styling (Blink/Webkit) */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0c0c0c;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 4px;
+      border: 2px solid #0c0c0c;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    /* Selection Highlight */
+    ::selection {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
+
+    /* Selection Highlight for Mozilla */
+    ::-moz-selection {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
+
+    /* ==========================================================================
+       2. Layout Elements
+       ========================================================================== */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 48px 64px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    header * {
+      pointer-events: auto;
+    }
+
+    .light-mode-toggle {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--muted-color);
+      text-transform: uppercase;
+      cursor: not-allowed;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      height: 1.2rem;
+      width: 200px;
+      user-select: none;
+    }
+
+    .light-mode-toggle .toggle-default {
+      position: absolute;
+      left: 0;
+      opacity: 1;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .light-mode-toggle .toggle-hover {
+      position: absolute;
+      left: 0;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+      color: var(--accent-color);
+    }
+
+    .light-mode-toggle:hover .toggle-default {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    .light-mode-toggle:hover .toggle-hover {
+      opacity: 0.85;
+      transform: translateY(0);
+    }
+
+    .resume-link {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--muted-color);
+      text-decoration: none;
+      text-transform: uppercase;
+      width: fit-content;
+      position: relative;
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .resume-link::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    .resume-link:hover {
+      color: var(--accent-color);
+    }
+
+    .resume-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 0 32px;
+      background-color: var(--bg-color);
+      z-index: 2;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 7rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text-color);
+      max-width: 1200px;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-headline span.italic-accent {
+      font-style: italic;
+      color: var(--accent-color);
+    }
+
+    .hero-subline {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+      font-weight: 300;
+      color: var(--muted-color);
+      letter-spacing: 0.05em;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-color);
+      opacity: 0.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-corner {
+      position: absolute;
+      bottom: 4.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-color);
+      opacity: 0.8;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-corner-left {
+      left: 3rem;
+      pointer-events: auto;
+      cursor: help;
+    }
+
+    .hero-corner-left .coords-hover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      color: var(--accent-color);
+    }
+
+    .hero-corner-left .coords-default {
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .hero-corner-left:hover .coords-default {
+      opacity: 0;
+    }
+
+    .hero-corner-left:hover .coords-hover {
+      opacity: 0.8;
+    }
+
+    .hero-corner-right {
+      right: 3rem;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted-color);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .seed {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .seed::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--root-stroke);
+      border-radius: 50%;
+      animation: seed-ripple 2s infinite ease-out;
+    }
+
+    @keyframes seed-ripple {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+
+    /* Sections Container & Core Grid */
+    .sections-container {
+      position: relative;
+      width: 100%;
+      padding-top: 10vh;
+      padding-bottom: 25vh;
+      overflow: visible;
+    }
+
+    .root-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #dark-veil-canvas {
+      position: absolute;
+      bottom: -38px;
+      left: 0;
+      width: 100%;
+      height: 380px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      filter: blur(22px);
+      mix-blend-mode: screen;
+      transition: opacity 0.8s ease;
+    }
+
+    .section-row {
+      position: relative;
+      width: 100%;
+      min-height: 45vh;
+      margin-bottom: 28vh;
+      z-index: 2;
+    }
+
+    .section-row:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 120px 1fr;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      align-items: center;
+    }
+
+    /* Column Placement */
+    .branch-left .card-column {
+      grid-column: 1;
+      justify-self: start;
+    }
+
+    .branch-right .card-column {
+      grid-column: 3;
+      justify-self: end;
+    }
+
+    /* Card Styling */
+    .card {
+      width: 100%;
+      max-width: 400px;
+      border-left: 1px solid var(--accent-color);
+      padding: 8px 0 8px 32px;
+      background-color: transparent;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.1s;
+    }
+
+    .card.is-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-color);
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent-color);
+    }
+
+    .card-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-color);
+    }
+
+    .card-body p {
+      margin-bottom: 16px;
+    }
+
+    .card-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Project List Styling */
+    .project-item {
+      margin-bottom: 28px;
+    }
+
+    .project-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent-color);
+      text-transform: uppercase;
+    }
+
+    .project-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-title a:hover {
+      opacity: 0.8;
+    }
+
+    .project-links {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .proj-link {
+      color: var(--muted-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .proj-link:hover {
+      color: var(--accent-color);
+    }
+
+    .proj-sep {
+      color: var(--muted-color);
+      opacity: 0.25;
+      margin: 0 4px;
+    }
+
+    .project-desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--muted-color);
+    }
+
+    .project-role {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--muted-color);
+      text-transform: uppercase;
+      margin-top: 2px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    /* Skills Grid Styling */
+    .skills-section {
+      margin-bottom: 20px;
+    }
+
+    .skills-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted-color);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .skills-items {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-color);
+      line-height: 1.7;
+    }
+
+    /* Contact Block */
+    /* ==========================================================================
+       About Me & Timeline Styles
+       ========================================================================== */
+    .metadata-block {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--accent-color);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted-color);
+      letter-spacing: 0.1em;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      line-height: 1.5;
+    }
+
+    .meta-key {
+      color: var(--muted-color);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+
+    .meta-val {
+      color: var(--text-color);
+    }
+
+    .about-timeline-column {
+      grid-column: 3 !important;
+      justify-self: end !important;
+    }
+
+    .timeline-container {
+      padding-left: 24px;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .timeline-container.card {
+      border-left: none !important;
+      padding: 0 !important;
+    }
+
+    .timeline-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: block;
+    }
+
+    .timeline-wrapper {
+      position: relative;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-left: 6px;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: var(--muted-color);
+      opacity: 0.4;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    .timeline-active .timeline-marker {
+      background-color: var(--accent-color);
+      opacity: 1;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      color: var(--accent-color);
+      margin-bottom: 4px;
+    }
+
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--text-color);
+      margin-bottom: 6px;
+    }
+
+    .timeline-title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .timeline-desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--muted-color);
+    }
+
+    /* ==========================================================================
+       Contact Section & Cards Styles
+       ========================================================================== */
+    .contact-heading-card.card {
+      border-left: none !important;
+      padding: 0 !important;
+      max-width: 440px;
+    }
+
+    .contact-sublabel {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .contact-heading-subtext {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--muted-color);
+    }
+
+    .contact-heading-column {
+      grid-column: 1 !important;
+      justify-self: start !important;
+    }
+
+    .contact-cards-column {
+      grid-column: 3 !important;
+      justify-self: end !important;
+    }
+
+    .contact-cards-container.card {
+      border-left: none !important;
+      padding: 0 !important;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-card-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact-card-item:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    .contact-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted-color);
+      text-transform: uppercase;
+    }
+
+    .contact-card-value {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-color);
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card-item:hover .contact-card-value {
+      color: var(--accent-color);
+    }
+
+    .contact-card-arrow {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--muted-color);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact-card-item:hover .contact-card-arrow {
+      transform: translateX(4px);
+      color: var(--accent-color);
+    }
+
+    .contact-footer {
+      width: 100%;
+      text-align: center;
+      margin-top: 80px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--text-color);
+      opacity: 0.75;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       3. SVG Animation Styles
+       ========================================================================== */
+    .branch-path {
+      transition: stroke-dashoffset 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .branch-path.is-active {
+      stroke-dashoffset: 0 !important;
+    }
+
+    /* Dynamic Aurora Motion */
+    @keyframes aurora-wave-0 {
+      0% { transform: translateX(0) scaleY(1); }
+      50% { transform: translateX(-35px) scaleY(1.08) skewX(-2deg); }
+      100% { transform: translateX(0) scaleY(1); }
+    }
+    @keyframes aurora-wave-1 {
+      0% { transform: translateX(0) scaleY(1.05); }
+      50% { transform: translateX(45px) scaleY(0.96) skewX(2.5deg); }
+      100% { transform: translateX(0) scaleY(1.05); }
+    }
+    @keyframes aurora-wave-2 {
+      0% { transform: translateX(0) skewX(-1deg); }
+      50% { transform: translateX(-25px) skewX(2deg) scaleY(1.05); }
+      100% { transform: translateX(0) skewX(-1deg); }
+    }
+
+    .aurora-0 {
+      transform-origin: bottom center;
+      animation: aurora-wave-0 14s infinite ease-in-out;
+    }
+    .aurora-1 {
+      transform-origin: bottom center;
+      animation: aurora-wave-1 22s infinite ease-in-out;
+    }
+    .aurora-2 {
+      transform-origin: bottom center;
+      animation: aurora-wave-2 18s infinite ease-in-out;
+    }
+
+    /* ==========================================================================
+       4. Responsive Design (Mobile / Tablet)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      header {
+        padding: 32px 24px;
+      }
+
+      .hero {
+        padding: 0 24px;
+      }
+
+      .hero-headline {
+        font-size: clamp(2.5rem, 9vw, 4rem);
+        margin-bottom: 20px;
+      }
+
+      .hero-subline {
+        font-size: 0.95rem;
+      }
+
+      .scroll-cue {
+        bottom: 32px;
+      }
+
+      .hero-corner {
+        bottom: 3.8rem;
+      }
+
+      .hero-corner-left {
+        left: 1.5rem;
+      }
+
+      .hero-corner-right {
+        right: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+        .hero-corner {
+          display: none !important;
+        }
+        .light-mode-toggle {
+          display: none !important;
+        }
+      }
+
+      /* Sections Container mobile overrides */
+      .sections-container {
+        padding-top: 5vh;
+        padding-bottom: 12vh;
+      }
+
+      .root-svg,
+      #dark-veil-canvas {
+        display: none !important;
+      }
+
+      .section-row {
+        min-height: auto !important;
+        margin-bottom: 80px !important;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 24px;
+        gap: 0;
+      }
+
+      .branch-left .card-column,
+      .branch-right .card-column {
+        grid-column: 1 !important;
+        justify-self: start !important;
+      }
+
+      .card {
+        max-width: 100% !important;
+        opacity: 1 !important;
+        transform: none !important;
+        border-left: 2px solid var(--accent-color) !important;
+        padding: 0 0 0 24px !important;
+        transition: none !important;
+      }
+
+      .timeline-container.card,
+      .contact-cards-container.card,
+      .contact-heading-card.card {
+        border-left: none !important;
+        padding: 0 !important;
+      }
+
+      .about-timeline-column,
+      .contact-cards-column {
+        grid-column: 1 !important;
+        justify-self: start !important;
+        margin-top: 40px;
+        width: 100% !important;
+      }
+
+      .section-label {
+        margin-bottom: 12px;
+      }
+
+      .section-title {
+        font-size: 1.85rem !important;
+        margin-bottom: 16px;
+      }
+
+      .contact-cta {
+        font-size: 1.5rem;
+        margin-bottom: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="light-mode-toggle">
+      <span class="toggle-default">Light Mode</span>
+      <span class="toggle-hover">We don't do that here</span>
+    </div>
+    <a href="AdukuriShankarSrivathsa_Resume.pdf" target="_blank" class="resume-link">Resume <span class="arrow-icon">→</span></a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-eyebrow">ADUKURI SHANKAR SRIVATHSA</div>
+    <h1 class="hero-headline">
+      The Universe Has Data.<br>I Build the <span class="italic-accent">Models</span>
+    </h1>
+    <p class="hero-subline">AI&ML Student | Astrophile | Aspiring ML Engineer</p>
+    
+    <!-- Corner Decorative Details -->
+    <div class="hero-corner hero-corner-left">
+      <span class="coords-default">RA 19h 44m 00.89s / DEC +44° 16′ 39.2″</span>
+      <span class="coords-hover">KEPLER-452B</span>
+    </div>
+    <div class="hero-corner hero-corner-right">
+      HYDERABAD, IN — 2026
+    </div>
+    
+    <div class="scroll-cue">
+      <span>scroll</span>
+      <div class="seed"></div>
+    </div>
+  </section>
+
+  <!-- Sections Wrapper with scroll-drawn SVG root -->
+  <main class="sections-container">
+    
+    <!-- SVG Tree Canvas -->
+    <svg id="tree-svg" class="root-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+    <!-- Dark Veil Canvas -->
+    <canvas id="dark-veil-canvas"></canvas>
+
+    <!-- 01 / ABOUT ME (Two-column layout) -->
+    <div class="section-row branch-left" id="section-about">
+      <div class="section-grid">
+        <!-- Left Column: Description & Metadata -->
+        <div class="card-column">
+          <div class="card">
+            <span class="section-label">01 / About Me</span>
+            <h2 class="section-title">The Search for <em>Elsewhere</em></h2>
+            <div class="card-body">
+              <p>I didn't start with machine learning. I started with design &mdash; building interfaces, thinking about how people interact with technology. But somewhere along the way I got pulled deeper. From UI/UX I moved into core ML, drawn by the idea that you could teach machines to find patterns humans couldn't see.</p>
+              <p>Then I looked up. Literally. The same tools I was learning could be pointed at the night sky &mdash; at exoplanets, at the question of whether other worlds could hold life. I'm an astrophile who found his instrument.</p>
+              
+              <div class="metadata-block">
+                <div class="meta-row"><span class="meta-key">Name:</span><span class="meta-val">A. Shankar Srivathsa</span></div>
+                <div class="meta-row"><span class="meta-key">Degree:</span><span class="meta-val">B.Tech &mdash; CSE (Artificial Intelligence &amp; Machine Learning)</span></div>
+                <div class="meta-row"><span class="meta-key">Institute:</span><span class="meta-val">Geethanjali College of Engineering &amp; Technology</span></div>
+                <div class="meta-row"><span class="meta-key">Location:</span><span class="meta-val">Hyderabad, India</span></div>
+                <div class="meta-row"><span class="meta-key">Status:</span><span class="meta-val">Final Year &middot; 2023&ndash;2027</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spacer Column (middle gutter) -->
+        <div class="gutter-spacer"></div>
+
+        <!-- Right Column: Timeline -->
+        <div class="card-column about-timeline-column">
+          <div class="card timeline-container">
+            <span class="timeline-section-label">MY TRANSIT</span>
+            
+            <div class="timeline-wrapper">
+              <!-- Entry 1 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-date">Mar 2025 &ndash; Jun 2025</div>
+                  <h4 class="timeline-title">UI/UX Intern <em>&middot; UptoSkills</em></h4>
+                  <p class="timeline-desc">&ldquo;Designed user interfaces and interaction flows for real products.&rdquo;</p>
+                </div>
+              </div>
+              
+              <!-- Entry 2 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-date">Aug 2025</div>
+                  <h4 class="timeline-title">GDG on Campus Organizer <em>&middot; Geethanjali College</em></h4>
+                  <p class="timeline-desc">&ldquo;Founded and led the Google Developer Group chapter on campus.&rdquo;</p>
+                </div>
+              </div>
+              
+              <!-- Entry 3 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-date">Nov 2025</div>
+                  <h4 class="timeline-title">Anchor <em>&middot; DevFest 2025, Hyderabad</em></h4>
+                  <p class="timeline-desc">&ldquo;Selected as on-stage anchor for Google's flagship developer festival in Hyderabad.&rdquo;</p>
+                </div>
+              </div>
+              
+              <!-- Entry 4 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-date">Feb 2026</div>
+                  <h4 class="timeline-title">GCTC Portal Administrator <em>&middot; Geethanjali College</em></h4>
+                  <p class="timeline-desc">&ldquo;Sole student selected to administrate the college student-run portal.&rdquo;</p>
+                </div>
+              </div>
+              
+              <!-- Entry 5 (Active/Last entry) -->
+              <div class="timeline-item timeline-active">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-date">Mar 2026 &ndash; Present</div>
+                  <h4 class="timeline-title">Exoplanet Habitability Research</h4>
+                  <p class="timeline-desc">&ldquo;Building a novel habitability scoring pipeline for tidally locked exoplanets using ESI, HZD, SEPHI, and a new TLHI framework.&rdquo;</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 / EXPERIENCE (Right branch) -->
+    <div class="section-row branch-right">
+      <div class="section-grid">
+        <div class="card-column">
+          <div class="card">
+            <span class="section-label">02 / Experience</span>
+            <h2 class="section-title">Professional <em>Experience</em></h2>
+            <div class="card-body">
+              <div class="project-item">
+                <div class="project-header">
+                  <h3 class="project-title">UptoSkills</h3>
+                </div>
+                <div class="project-role">UI/UX Intern &middot; March 2025 &mdash; June 2025</div>
+                <p class="project-desc">Led a team as Senior Team Lead, managing end-to-end delivery of 6 medium-complexity UI/UX projects within a 3-month timeline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 / SELECTED WORK (Left branch) -->
+    <div class="section-row branch-left">
+      <div class="section-grid">
+        <div class="card-column">
+          <div class="card">
+            <span class="section-label">03 / Selected Work</span>
+            <h2 class="section-title">Computational <em>Artifacts</em></h2>
+            <div class="card-body">
+              <div class="project-item">
+                <div class="project-header">
+                  <h3 class="project-title">Exoplanet Habitability</h3>
+                  <div class="project-links">
+                    <a href="https://github.com/ShankarSrivathsa/exoplanet-habitability" target="_blank" rel="noopener noreferrer" class="proj-link">github</a>
+                  </div>
+                </div>
+                <p class="project-desc">A three-tier approach to find habitability of exoplanets. Processed 5,000+ exoplanet candidates from NASA Exoplanet Archive through a 3-stage scoring pipeline (ESI &rarr; HZD &rarr; SEPHI), applying a radius filter of &lt; 1.6 R<sub>&oplus;</sub> to isolate rocky planet candidates. Modeled tidal locking probability using stellar age and lock timescale to produce a blended habitability score, narrowing candidates to a ranked shortlist with a composite index.</p>
+              </div>
+              <div class="project-item">
+                <div class="project-header">
+                  <h3 class="project-title">Smart Power Consumption Predictor</h3>
+                  <div class="project-links">
+                    <a href="https://github.com/ShankarSrivathsa/smart-power-consumption-predictor" target="_blank" rel="noopener noreferrer" class="proj-link">github</a>
+                  </div>
+                </div>
+                <p class="project-desc">Built a regression-based ML model to predict household power consumption, applying feature engineering and data preprocessing pipelines using NumPy and Pandas. Evaluated model performance using scikit-learn metrics (MAE, RMSE) and visualized consumption trends and feature importance using Matplotlib and Seaborn.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 / LEADERSHIP & COMMUNITY (Right branch) -->
+    <div class="section-row branch-right">
+      <div class="section-grid">
+        <div class="card-column">
+          <div class="card">
+            <span class="section-label">04 / Leadership &amp; Community</span>
+            <h2 class="section-title">Collective <em>Empowerment</em></h2>
+            <div class="card-body">
+              <div class="project-item">
+                <div class="project-header">
+                  <h3 class="project-title"><a href="https://gdg.community.dev/gdg-on-campus-geethanjali-college-of-engineering-and-technology-hyderabad-india/" target="_blank" rel="noopener noreferrer">GDG on Campus GCTC</a></h3>
+                </div>
+                <div class="project-role">Founder &amp; Lead &middot; August 2025 &mdash; Present</div>
+                <p class="project-desc">Founded and established the GDG on Campus chapter at Geethanjali College of Engineering and Technology. Achieved Tier 3 in the Google Cloud Campaign and hosted GSoC awareness sessions for students.</p>
+              </div>
+              <div class="project-item">
+                <div class="project-header">
+                  <h3 class="project-title"><a href="https://www.gctcportal.in/p/new.html" target="_blank" rel="noopener noreferrer">GCTC Portal</a></h3>
+                </div>
+                <div class="project-role">Administrator &middot; February 2026 &mdash; Present</div>
+                <p class="project-desc">Selected as one of the college's student administrators for gctcportal.in &mdash; a competitive, single-seat annual appointment. Managed academic notifications, marks updates, and college announcements via the portal and official Instagram handle. Served as Sub Core &ndash; Technical for the college fest committee, overseeing technical event coordination.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 / SKILLS (Left branch) -->
+    <div class="section-row branch-left">
+      <div class="section-grid">
+        <div class="card-column">
+          <div class="card">
+            <span class="section-label">05 / Skills</span>
+            <h2 class="section-title">Instruments of <em>Inquiry</em></h2>
+            <div class="card-body">
+              <div class="skills-section">
+                <h3 class="skills-category">Programming Languages</h3>
+                <p class="skills-items">Python, Java, C, HTML, CSS, JavaScript</p>
+              </div>
+              <div class="skills-section">
+                <h3 class="skills-category">Libraries / Frameworks</h3>
+                <p class="skills-items">NumPy, Pandas, scikit-learn, Matplotlib, Seaborn</p>
+              </div>
+              <div class="skills-section">
+                <h3 class="skills-category">Tools / Platforms</h3>
+                <p class="skills-items">GitHub, VS Code, Figma, Jupyter, Google AI Studio, Firebase Hosting</p>
+              </div>
+              <div class="skills-section">
+                <h3 class="skills-category">Databases</h3>
+                <p class="skills-items">MySQL</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 / CONNECT (Two-column layout) -->
+    <div class="section-row branch-right" id="section-contact">
+      <div class="section-grid">
+        <!-- Left Side: Heading block -->
+        <div class="card-column contact-heading-column">
+          <div class="card contact-heading-card">
+            <span class="section-label">06 / Connect</span>
+            <span class="contact-sublabel">COLLABORATION &amp; ENQUIRIES</span>
+            <h2 class="section-title">Let's map the <em>transits</em> together.</h2>
+            <p class="contact-heading-subtext">Open to research collaborations, ML engineering roles, and conversations about exoplanets. If you're working at the intersection of AI and space science &mdash; let's talk.</p>
+          </div>
+        </div>
+
+        <!-- Spacer Column (middle gutter) -->
+        <div class="gutter-spacer"></div>
+
+        <!-- Right Side: Contact cards -->
+        <div class="card-column contact-cards-column">
+          <div class="card contact-cards-container">
+            
+            <!-- Card 1 -->
+            <a href="mailto:shankarsrivathsa@gmail.com" class="contact-card-item">
+              <div class="contact-card-info">
+                <span class="contact-card-label">EMAIL ADDRESS</span>
+                <span class="contact-card-value">shankarsrivathsa@gmail.com</span>
+              </div>
+              <span class="contact-card-arrow">&rarr;</span>
+            </a>
+            
+            <!-- Card 2 -->
+            <a href="https://github.com/ShankarSrivathsa" target="_blank" rel="noopener noreferrer" class="contact-card-item">
+              <div class="contact-card-info">
+                <span class="contact-card-label">GITHUB</span>
+                <span class="contact-card-value">@ShankarSrivathsa</span>
+              </div>
+              <span class="contact-card-arrow">&rarr;</span>
+            </a>
+            
+            <!-- Card 3 -->
+            <a href="https://linkedin.com/in/ashankarsrivathsa" target="_blank" rel="noopener noreferrer" class="contact-card-item">
+              <div class="contact-card-info">
+                <span class="contact-card-label">LINKEDIN</span>
+                <span class="contact-card-value">in/ashankarsrivathsa</span>
+              </div>
+              <span class="contact-card-arrow">&rarr;</span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer Line -->
+      <div class="contact-footer">
+        TARGETING: SPACE-TECH &middot; ASTROPHYSICS R&amp;D &middot; ML ENGINEERING
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Dynamic SVG & Scroll Trigger Script -->
+  <script>
+    // Dynamically update the bottom-right corner year on page load.
+    // This automatically increments from 2026 to the next year on January 1st.
+    const rightCorner = document.querySelector('.hero-corner-right');
+    if (rightCorner) {
+      rightCorner.textContent = `HYDERABAD, IN — ${new Date().getFullYear()}`;
+    }
+
+    const svg = document.getElementById('tree-svg');
+    const container = document.querySelector('.sections-container');
+    const veilCanvas = document.getElementById('dark-veil-canvas');
+    const veilCtx = veilCanvas ? veilCanvas.getContext('2d') : null;
+    
+    let mainRootPath = null;
+    let mainRootLength = 0;
+    let observer = null;
+    let treeCards = [];
+
+    let veilActive = false;
+    let veilTime = 0;
+    let veilAnimationId = null;
+
+    /**
+     * Initializes the SVG size and triggers the drawing sequence.
+     */
+    function initSVG() {
+      // Don't waste operations on mobile viewports since the SVG is hidden
+      if (window.innerWidth <= 768) {
+        if (observer) observer.disconnect();
+        svg.innerHTML = '';
+        return;
+      }
+
+      const width = container.offsetWidth;
+      const height = container.offsetHeight;
+
+      svg.setAttribute('width', width);
+      svg.setAttribute('height', height);
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      
+      // Clear previous drawings to prevent path multiplication on resize
+      svg.innerHTML = '';
+
+      if (veilCanvas) {
+        veilCanvas.width = width;
+        veilCanvas.height = 380;
+      }
+
+      drawTree(width, height);
+    }
+
+    /**
+     * Plots organic, curved paths connecting section cards to a central tree root.
+     */
+    function drawTree(width, height) {
+      const sections = document.querySelectorAll('.section-row');
+      const containerRect = container.getBoundingClientRect();
+      const centerX = width / 2;
+      
+      treeCards = [];
+      sections.forEach((section, index) => {
+        let card = section.querySelector('.card');
+        if (index === 5) {
+          card = section.querySelector('.contact-cards-container');
+        }
+        const cardRect = card.getBoundingClientRect();
+
+        // Calculate card Y coordinate relative to the SVG container
+        const cardY = cardRect.top - containerRect.top + cardRect.height / 2;
+        
+        // Find nearest coordinate on card edge facing the center gutter
+        const isLeft = section.classList.contains('branch-left');
+        const cardX = isLeft 
+          ? (cardRect.right - containerRect.left)
+          : (cardRect.left - containerRect.left);
+
+        treeCards.push({ x: cardX, y: cardY, isLeft, index });
+      });
+
+      if (treeCards.length === 0) return;
+
+      // 1. Plot the Main Root Path with an organic wobbly wave up to the split point
+      const rootPoints = [];
+      const startY = 0; // Connect directly to the scroll seed dot at the top
+      const splitY = treeCards[treeCards.length - 1].y + 50; // split shortly below the last section
+      
+      for (let y = startY; y <= splitY; y += 30) {
+        // High-end, smooth wobble formula using alternating sine frequencies
+        const wobble = Math.sin(y * 0.005) * 16 + Math.cos(y * 0.012) * 6;
+        rootPoints.push({ x: centerX + wobble, y: y });
+      }
+      
+      // Create a smooth quadratic curve string through all points
+      let mainPathD = `M ${rootPoints[0].x} ${rootPoints[0].y}`;
+      for (let i = 1; i < rootPoints.length - 1; i++) {
+        const xc = (rootPoints[i].x + rootPoints[i + 1].x) / 2;
+        const yc = (rootPoints[i].y + rootPoints[i + 1].y) / 2;
+        mainPathD += ` Q ${rootPoints[i].x} ${rootPoints[i].y} ${xc} ${yc}`;
+      }
+      mainPathD += ` L ${rootPoints[rootPoints.length - 1].x} ${rootPoints[rootPoints.length - 1].y}`;
+
+      // Instantiate the main root SVG element
+      mainRootPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      mainRootPath.setAttribute('d', mainPathD);
+      mainRootPath.setAttribute('id', 'main-root-path');
+      mainRootPath.setAttribute('stroke', '#ffffff');
+      mainRootPath.setAttribute('stroke-opacity', '0.25');
+      mainRootPath.setAttribute('stroke-width', '1.5');
+      mainRootPath.setAttribute('fill', 'none');
+      mainRootPath.setAttribute('stroke-linecap', 'round');
+      
+      svg.appendChild(mainRootPath);
+
+      // Measure the root line for exact scroll-bound growth
+      mainRootLength = mainRootPath.getTotalLength();
+      mainRootPath.style.strokeDasharray = mainRootLength;
+      mainRootPath.style.strokeDashoffset = mainRootLength;
+
+      // 1b. Draw a hanger thread and a highly aesthetic inline SVG Saturn planet at the root tip
+      const lastPoint = rootPoints[rootPoints.length - 1];
+      
+      // Hanger line
+      const hangerLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      hangerLine.setAttribute('x1', lastPoint.x);
+      hangerLine.setAttribute('y1', lastPoint.y);
+      hangerLine.setAttribute('x2', lastPoint.x);
+      hangerLine.setAttribute('y2', lastPoint.y + 12);
+      hangerLine.setAttribute('stroke', '#ffffff');
+      hangerLine.setAttribute('stroke-opacity', '0.22');
+      hangerLine.setAttribute('stroke-width', '1');
+      hangerLine.setAttribute('id', 'saturn-hanger');
+      svg.appendChild(hangerLine);
+
+      // Saturn group
+      const saturnG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      saturnG.setAttribute('id', 'saturn-group');
+      saturnG.setAttribute('transform', `translate(${lastPoint.x}, ${lastPoint.y + 20}) rotate(-14)`);
+      saturnG.style.opacity = '0';
+      saturnG.style.transition = 'opacity 0.6s ease';
+      
+      saturnG.innerHTML = `
+        <!-- Back Ring Segment -->
+        <path d="M -16 0 A 16 4 0 0 1 16 0" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.0" />
+        <!-- Planet Body -->
+        <circle cx="0" cy="0" r="7" fill="#0c0c0c" stroke="#ffffff" stroke-width="1.2" />
+        <!-- Front Ring Segment -->
+        <path d="M 16 0 A 16 4 0 0 1 -16 0" fill="none" stroke="#ffffff" stroke-width="1.2" />
+      `;
+      svg.appendChild(saturnG);
+
+      // 2. Plot connecting Branch Lines for each section
+      treeCards.forEach(card => {
+        if (card.index === 0 || card.index === 5) return; // Skip About Me and Connect branch lines
+        const y = card.y;
+        
+        // Match the exact wobble of the central root at the card's Y position
+        const wobble = Math.sin(y * 0.005) * 16 + Math.cos(y * 0.012) * 6;
+        const rootX = centerX + wobble;
+
+        // Set start coordinates slightly higher on the root to look like natural growth splitting off
+        const startY = y - 48;
+        const cp1x = rootX;
+        const cp1y = y - 10;
+        const cp2x = rootX + (card.x - rootX) * 0.45;
+        const cp2y = y;
+        const endX = card.x;
+        const endY = y;
+
+        // Cubic Bezier curve formula creating a gorgeous drooping branch shape
+        const branchD = `M ${rootX} ${startY} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${endX} ${endY}`;
+
+        const branchPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        branchPath.setAttribute('d', branchD);
+        branchPath.setAttribute('class', 'branch-path');
+        branchPath.setAttribute('id', `branch-path-${card.index}`);
+        branchPath.setAttribute('stroke', '#ffffff');
+        branchPath.setAttribute('stroke-opacity', '0.25');
+        branchPath.setAttribute('stroke-width', '1.5');
+        branchPath.setAttribute('fill', 'none');
+        branchPath.setAttribute('stroke-linecap', 'round');
+
+        svg.appendChild(branchPath);
+
+        // Pre-set DashArray properties to enable transition drawing on observation
+        const branchLength = branchPath.getTotalLength();
+        branchPath.style.strokeDasharray = branchLength;
+        branchPath.style.strokeDashoffset = branchLength;
+      });
+
+      // Synchronize scroll progression immediately in case user is already down the page
+      updateScrollProgress();
+
+      // Establish the IntersectionObservers
+      // observeSections();
+    }
+
+    /**
+     * Renders flowing liquid ribbon curves onto the dark-veil canvas.
+     */
+    function drawVeil() {
+      if (!veilActive || !veilCtx || !veilCanvas) return;
+      
+      const width = veilCanvas.width;
+      const height = veilCanvas.height;
+      
+      veilCtx.clearRect(0, 0, width, height);
+      veilTime += 0.0032; // slightly faster organic fluid motion
+      
+      const numWaves = 4;
+      
+      for (let j = 0; j < numWaves; j++) {
+        veilCtx.beginPath();
+        const offset = j * 45;
+        const speed = veilTime * (1 + j * 0.12);
+        
+        veilCtx.moveTo(-50, height);
+        
+        for (let x = 0; x <= width + 50; x += 15) {
+          const fade = Math.sin((x / width) * Math.PI); // fade out at edges
+          
+          // Organic overlapping sine waves with increased amplitude for richer movement
+          const wave1 = Math.sin(x * 0.002 + speed + offset) * 90;
+          const wave2 = Math.cos(x * 0.005 - speed * 1.2 + offset * 0.6) * 40;
+          const wave3 = Math.sin(x * 0.01 + speed * 1.5) * 15;
+          
+          const y = height - 110 + (wave1 + wave2 + wave3) * fade;
+          veilCtx.lineTo(x, y);
+        }
+        
+        veilCtx.lineTo(width + 50, height + 40);
+        veilCtx.closePath();
+        
+        // Expand the gradient downward beyond the canvas bottom to ensure seamless anchoring
+        const grad = veilCtx.createLinearGradient(0, height - 240, 0, height + 40);
+        const alpha = 0.042 + Math.sin(veilTime + j) * 0.012; // doubled opacity presence
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+        grad.addColorStop(0.4, `rgba(255, 255, 255, ${alpha})`);
+        grad.addColorStop(1, `rgba(255, 255, 255, ${alpha * 0.4})`); // maintain ambient glow at the absolute screen border
+        
+        veilCtx.fillStyle = grad;
+        veilCtx.fill();
+      }
+      
+      veilAnimationId = requestAnimationFrame(drawVeil);
+    }
+
+    /**
+     * Drives the central root, bottom rootlets, and aurora glows using scroll position.
+     */
+    function updateScrollProgress() {
+      if (!mainRootPath || window.innerWidth <= 768) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate total vertical height of the root path
+      const sections = document.querySelectorAll('.section-row');
+      const lastSection = sections[sections.length - 1];
+      const lastSectionCard = lastSection.querySelector('.contact-cards-container') || lastSection.querySelector('.card');
+      const lastSectionRect = lastSectionCard.getBoundingClientRect();
+      const splitY = lastSectionRect.top - containerRect.top + lastSectionRect.height / 2 + 50;
+
+      // Calculate depth of the screen's focus zone (62% of viewport height) relative to container top
+      const targetY = (viewportHeight * 0.62) - containerRect.top;
+
+      // Map this depth to a clean 0.0 to 1.0 ratio of the root's total height
+      let mainRootRatio = targetY / splitY;
+      mainRootRatio = Math.max(0, Math.min(1, mainRootRatio));
+
+      // 1. Draw Main Root: grows dynamically exactly ahead of the scroll line
+      mainRootPath.style.strokeDashoffset = mainRootLength * (1 - mainRootRatio);
+
+      // 2. Coordinated Branch & Card sprout: sprouts exactly when wobbly root passes the branch-off Y position
+      treeCards.forEach(cardItem => {
+        const branch = document.getElementById(`branch-path-${cardItem.index}`);
+        const sectionRow = sections[cardItem.index];
+        const cardElements = sectionRow ? sectionRow.querySelectorAll('.card') : [];
+
+        let isSprouted = false;
+        if (cardItem.index === 0) {
+          // Section 01 trigger: when 50% of the section height is inside the viewport
+          if (sectionRow) {
+            const rowRect = sectionRow.getBoundingClientRect();
+            isSprouted = (rowRect.top <= viewportHeight - rowRect.height * 0.5);
+          } else {
+            isSprouted = (targetY >= cardItem.y - 48);
+          }
+        } else {
+          // Other sections sprout exactly when the crawling wobbly root tip passes their branch Y-position
+          isSprouted = (targetY >= cardItem.y - 48);
+        }
+
+        if (isSprouted) {
+          if (branch) branch.classList.add('is-active');
+          cardElements.forEach(c => c.classList.add('is-active'));
+        } else {
+          if (branch) branch.classList.remove('is-active');
+          cardElements.forEach(c => c.classList.remove('is-active'));
+        }
+      });
+
+      // 3. Reveal Saturn: fades in during the last 8% of wobbly root growth
+      let saturnRatio = (mainRootRatio - 0.92) / 0.08;
+      saturnRatio = Math.max(0, Math.min(1, saturnRatio));
+
+      const saturnGroup = document.getElementById('saturn-group');
+      if (saturnGroup) {
+        saturnGroup.style.opacity = saturnRatio;
+      }
+
+      // 4. Fade in and animate the Dark Veil canvas in the final 22% of scrolling
+      let veilRatio = (mainRootRatio - 0.78) / 0.22;
+      veilRatio = Math.max(0, Math.min(1, veilRatio));
+
+      if (veilCanvas) {
+        veilCanvas.style.opacity = veilRatio;
+        
+        if (veilRatio > 0) {
+          if (!veilActive) {
+            veilActive = true;
+            drawVeil();
+          }
+        } else {
+          veilActive = false;
+          if (veilAnimationId) {
+            cancelAnimationFrame(veilAnimationId);
+            veilAnimationId = null;
+          }
+        }
+      }
+    }
+
+    /**
+     * Observes section visibility to trigger branch line growth and card reveals.
+     */
+    function observeSections() {
+      if (observer) observer.disconnect();
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -18% 0px', // Trigger slightly before section enters middle of screen
+        threshold: 0.1
+      };
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = entry.target.dataset.index;
+            const branch = document.getElementById(`branch-path-${index}`);
+            const cards = entry.target.querySelectorAll('.card');
+
+            if (branch) branch.classList.add('is-active');
+            cards.forEach(c => c.classList.add('is-active'));
+            
+            // Seal state to prevent repeat animations
+            entry.target.classList.add('section-active');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.section-row').forEach((row, index) => {
+        row.dataset.index = index;
+        
+        // Handle pre-activated sections on redraws
+        if (row.classList.contains('section-active')) {
+          const branch = document.getElementById(`branch-path-${index}`);
+          const cards = row.querySelectorAll('.card');
+          if (branch) branch.classList.add('is-active');
+          cards.forEach(c => c.classList.add('is-active'));
+        } else {
+          observer.observe(row);
+        }
+      });
+    }
+
+    // Window Events & Throttling
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        veilActive = false;
+        if (veilAnimationId) {
+          cancelAnimationFrame(veilAnimationId);
+          veilAnimationId = null;
+        }
+        initSVG();
+      }, 100);
+    });
+
+    // Fire initialization on content loads
+    window.addEventListener('load', initSVG);
+    window.addEventListener('scroll', updateScrollProgress);
+    
+    // Fallback: trigger drawing in case resources load asynchronously
+    document.addEventListener('DOMContentLoaded', initSVG);
+  </script>
+</body>
+</html>
