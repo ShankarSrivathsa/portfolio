@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -20 40 40">
+  <style>
+    path {
+      fill: none;
+    }
+    path, circle {
+      stroke: #ffffff;
+    }
+    circle {
+      fill: #0c0c0c;
+    }
+    @media (prefers-color-scheme: light) {
+      path, circle {
+        stroke: #121212;
+      }
+      circle {
+        fill: #ffffff;
+      }
+      .back-ring {
+        stroke: rgba(18, 18, 18, 0.25) !important;
+      }
+    }
+  </style>
+  <g transform="rotate(-14)">
+    <!-- Back Ring Segment -->
+    <path class="back-ring" d="M -16 0 A 16 4 0 0 1 16 0" stroke="rgba(255,255,255,0.22)" stroke-width="1.0" />
+    <!-- Planet Body -->
+    <circle cx="0" cy="0" r="7" stroke-width="1.2" />
+    <!-- Front Ring Segment -->
+    <path d="M 16 0 A 16 4 0 0 1 -16 0" stroke-width="1.2" />
+  </g>
+</svg>
