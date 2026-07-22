@@ -17,7 +17,7 @@
        1. Core Design Tokens & System Resets
        ========================================================================== */
     :root {
-      --bg-color: #0c0c0c;
+      --bg-color: #050608;
       --text-color: #e5e5e3;
       --accent-color: #ffffff;
       --muted-color: #888888;
@@ -38,12 +38,12 @@
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.16) #0c0c0c;
+      scrollbar-color: rgba(255, 255, 255, 0.16) var(--bg-color);
     }
 
     body {
       background-color: var(--bg-color);
-      background-image: radial-gradient(circle at 50% 30vh, #131313 0%, #0c0c0c 100%);
+      background-image: radial-gradient(circle at 50% 30vh, #0a0c10 0%, var(--bg-color) 100%);
       background-attachment: fixed;
       color: var(--text-color);
       font-family: var(--font-body);
@@ -53,6 +53,53 @@
       overflow: visible;
     }
 
+    /* Film grain overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Starfield container */
+    .starfield-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    .star-twinkle-1 { animation: twinkle-1 9s infinite ease-in-out; }
+    .star-twinkle-2 { animation: twinkle-2 11s infinite ease-in-out; }
+    .star-twinkle-3 { animation: twinkle-3 13s infinite ease-in-out; }
+    .star-twinkle-4 { animation: twinkle-4 15s infinite ease-in-out; }
+
+    @keyframes twinkle-1 {
+      0%, 100% { opacity: 0.25; }
+      50% { opacity: 0.9; }
+    }
+    @keyframes twinkle-2 {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 0.8; }
+    }
+    @keyframes twinkle-3 {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.85; }
+    }
+    @keyframes twinkle-4 {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.95; }
+    }
+
     /* Custom Theme Scrollbar Styling (Blink/Webkit) */
     ::-webkit-scrollbar {
       width: 8px;
@@ -60,13 +107,13 @@
     }
 
     ::-webkit-scrollbar-track {
-      background: #0c0c0c;
+      background: var(--bg-color);
     }
 
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.16);
       border-radius: 4px;
-      border: 2px solid #0c0c0c;
+      border: 2px solid var(--bg-color);
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -394,7 +441,9 @@
       max-width: 400px;
       border-left: 1px solid var(--accent-color);
       padding: 8px 0 8px 32px;
-      background-color: transparent;
+      background-color: rgba(5, 6, 8, 0.45);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -989,6 +1038,11 @@
 </head>
 <body>
 
+  <!-- Starfield background layer -->
+  <div class="starfield-container">
+    <svg id="starfield-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"></svg>
+  </div>
+
   <header>
     <div class="light-mode-toggle">
       <span class="toggle-default">Light Mode</span>
@@ -1276,6 +1330,61 @@
 
   <!-- Dynamic SVG & Scroll Trigger Script -->
   <script>
+    /**
+     * Dynamically generates a sparse starfield layer inside the #starfield-svg element.
+     */
+    function createStarfield() {
+      const starfieldSvg = document.getElementById('starfield-svg');
+      if (!starfieldSvg || starfieldSvg.children.length > 0) return;
+      
+      const numStars = 100;
+      // 3 cluster centers (percentage coordinates)
+      const clusters = [
+        { x: 20 + Math.random() * 20, y: 15 + Math.random() * 25 },
+        { x: 60 + Math.random() * 20, y: 40 + Math.random() * 30 },
+        { x: 35 + Math.random() * 30, y: 70 + Math.random() * 20 }
+      ];
+      
+      for (let i = 0; i < numStars; i++) {
+        let x, y;
+        // 45% of stars cluster around centers, 55% distributed uniformly
+        if (Math.random() < 0.45) {
+          const cluster = clusters[Math.floor(Math.random() * clusters.length)];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.random() * 12; // spread distance in %
+          x = cluster.x + Math.cos(angle) * dist;
+          y = cluster.y + Math.sin(angle) * dist;
+          
+          x = Math.max(1, Math.min(99, x));
+          y = Math.max(1, Math.min(99, y));
+        } else {
+          x = Math.random() * 100;
+          y = Math.random() * 100;
+        }
+        
+        const r = Math.random() < 0.75 ? 1 : 1.5; // 1px or 1.5px
+        const baseOpacity = 0.2 + Math.random() * 0.55;
+        
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', `${x}%`);
+        circle.setAttribute('cy', `${y}%`);
+        circle.setAttribute('r', r);
+        circle.setAttribute('fill', '#f4ede2'); // Pale warm white
+        
+        // 12% twinkle slowly
+        if (Math.random() < 0.12) {
+          const type = Math.floor(Math.random() * 4) + 1;
+          circle.classList.add(`star-twinkle-${type}`);
+          const delay = -(Math.random() * 15).toFixed(2);
+          circle.style.animationDelay = `${delay}s`;
+        } else {
+          circle.style.opacity = baseOpacity.toFixed(2);
+        }
+        
+        starfieldSvg.appendChild(circle);
+      }
+    }
+
     // Dynamically update the bottom-right corner year on page load.
     // This automatically increments from 2026 to the next year on January 1st.
     const rightCorner = document.querySelector('.hero-corner-right');
@@ -1665,11 +1774,17 @@
     });
 
     // Fire initialization on content loads
-    window.addEventListener('load', initSVG);
+    window.addEventListener('load', () => {
+      initSVG();
+      createStarfield();
+    });
     window.addEventListener('scroll', updateScrollProgress);
     
     // Fallback: trigger drawing in case resources load asynchronously
-    document.addEventListener('DOMContentLoaded', initSVG);
+    document.addEventListener('DOMContentLoaded', () => {
+      initSVG();
+      createStarfield();
+    });
   </script>
 </body>
 </html>
