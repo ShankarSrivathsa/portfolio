@@ -391,14 +391,13 @@
     #dark-veil-canvas {
       position: absolute;
       bottom: -38px;
-      left: 0;
-      width: 100%;
+      left: -50px;
+      width: calc(100% + 100px);
       height: 380px;
       pointer-events: none;
       z-index: 1;
       opacity: 0;
       filter: blur(22px);
-      mix-blend-mode: screen;
       transition: opacity 0.8s ease;
     }
 
@@ -1592,6 +1591,14 @@
       veilCtx.clearRect(0, 0, width, height);
       veilTime += 0.0032; // slightly faster organic fluid motion
       
+      // Draw solid masking gradient first to hide stars/gradient underneath
+      const maskGrad = veilCtx.createLinearGradient(0, 0, 0, height);
+      maskGrad.addColorStop(0, 'rgba(5, 6, 8, 0)');
+      maskGrad.addColorStop(0.5, 'rgba(5, 6, 8, 0.75)');
+      maskGrad.addColorStop(1, 'rgba(5, 6, 8, 1)');
+      veilCtx.fillStyle = maskGrad;
+      veilCtx.fillRect(0, 0, width, height);
+      
       const numWaves = 4;
       
       for (let j = 0; j < numWaves; j++) {
@@ -1599,29 +1606,27 @@
         const offset = j * 45;
         const speed = veilTime * (1 + j * 0.12);
         
-        veilCtx.moveTo(-50, height);
+        veilCtx.moveTo(-50, height + 100);
         
-        for (let x = 0; x <= width + 50; x += 15) {
-          const fade = Math.sin((x / width) * Math.PI); // fade out at edges
-          
+        for (let x = -50; x <= width + 50; x += 15) {
           // Organic overlapping sine waves with increased amplitude for richer movement
           const wave1 = Math.sin(x * 0.002 + speed + offset) * 90;
           const wave2 = Math.cos(x * 0.005 - speed * 1.2 + offset * 0.6) * 40;
           const wave3 = Math.sin(x * 0.01 + speed * 1.5) * 15;
           
-          const y = height - 110 + (wave1 + wave2 + wave3) * fade;
+          const y = height - 110 + (wave1 + wave2 + wave3);
           veilCtx.lineTo(x, y);
         }
         
-        veilCtx.lineTo(width + 50, height + 40);
+        veilCtx.lineTo(width + 50, height + 100);
         veilCtx.closePath();
         
         // Expand the gradient downward beyond the canvas bottom to ensure seamless anchoring
         const grad = veilCtx.createLinearGradient(0, height - 240, 0, height + 40);
-        const alpha = 0.042 + Math.sin(veilTime + j) * 0.012; // doubled opacity presence
+        const alpha = 0.05 + Math.sin(veilTime + j) * 0.015;
         grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-        grad.addColorStop(0.4, `rgba(255, 255, 255, ${alpha})`);
-        grad.addColorStop(1, `rgba(255, 255, 255, ${alpha * 0.4})`); // maintain ambient glow at the absolute screen border
+        grad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha})`);
+        grad.addColorStop(1, `rgba(255, 255, 255, ${alpha * 1.5})`); // make bottom more visible
         
         veilCtx.fillStyle = grad;
         veilCtx.fill();
