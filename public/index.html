@@ -872,30 +872,59 @@
       animation: seed-ripple 2.5s infinite ease-out;
     }
 
-    /* Skills Grid Styling */
-    .skills-section {
-      margin-bottom: 20px;
+    /* Skills Two-Column Layout */
+    .skills-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .skills-section:last-child {
-      margin-bottom: 0;
+    .skill-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: border-color 0.3s ease, background 0.3s ease;
     }
 
-    .skills-category {
+    .skill-box:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-box-label {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--muted-color);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--accent-color);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      display: block;
     }
 
-    .skills-items {
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-pill {
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 0.78rem;
       font-weight: 300;
       color: var(--text-color);
-      line-height: 1.7;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      padding: 4px 10px;
+      line-height: 1.3;
+      white-space: nowrap;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .skill-pill:hover {
+      border-color: rgba(255, 255, 255, 0.28);
+      color: #fff;
     }
 
     /* Contact Block */
@@ -1160,6 +1189,37 @@
       color: var(--accent-color);
     }
 
+    /* Easter Egg / Pun Card */
+    .contact-pun-value {
+      position: relative;
+      display: inline-block;
+    }
+
+    .contact-pun-default,
+    .contact-pun-hover {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-pun-hover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transform: translateY(2px);
+      color: var(--accent-color);
+      white-space: nowrap;
+    }
+
+    .contact-card-item:hover .contact-pun-default {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+
+    .contact-card-item:hover .contact-pun-hover {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .contact-footer {
       width: 100%;
       text-align: center;
@@ -1377,9 +1437,8 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-eyebrow">ADUKURI SHANKAR SRIVATHSA</div>
     <h1 class="hero-headline">
-      The Universe Has Data.<br>I Build the <span class="italic-accent">Models</span>
+      Adukuri<br><span class="italic-accent">Shankar</span> Srivathsa
     </h1>
     <p class="hero-subline">AI&ML Student | Astrophile | Aspiring ML Engineer</p>
     
@@ -1443,9 +1502,9 @@
               <div class="timeline-item">
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
-                  <div class="timeline-date">Mar 2025 &ndash; Jun 2025</div>
-                  <h4 class="timeline-title">UI/UX Intern <em>&middot; UptoSkills</em></h4>
-                  <p class="timeline-desc">&ldquo;Designed user interfaces and interaction flows for real products.&rdquo;</p>
+                  <div class="timeline-date">May 2025 &ndash; July 2025</div>
+                  <h4 class="timeline-title">Tech Lead Intern <em>&middot; VISWAM.AI</em></h4>
+                  <p class="timeline-desc">&ldquo;Led a three-member team as Tech Lead during an 8-week AI/ML programme, learning machine learning concepts, supporting fellow interns.&rdquo;</p>
                 </div>
               </div>
               
@@ -1491,10 +1550,10 @@
             <div class="card-body">
               <div class="project-item">
                 <div class="project-header">
-                  <h3 class="project-title">UptoSkills</h3>
+                  <h3 class="project-title">VISWAM.AI</h3>
                 </div>
-                <div class="project-role">UI/UX Intern &middot; March 2025 &mdash; June 2025</div>
-                <p class="project-desc">Led a team as Senior Team Lead, managing end-to-end delivery of 6 medium-complexity UI/UX projects within a 3-month timeline.</p>
+                <div class="project-role">Tech Lead Intern &middot; May 2025 &mdash; July 2025</div>
+                <p class="project-desc">Led a three-member team as Tech Lead during an 8-week AI/ML programme, learning machine learning concepts, supporting fellow interns, and contributing to Swecha's Telugu LLM initiative through Telugu language data collection and corpus development.</p>
               </div>
             </div>
           </div>
@@ -1630,29 +1689,68 @@
       </div>
     </div>
 
-    <!-- 05 / SKILLS (Left branch) -->
-    <div class="section-row branch-left">
+    <!-- 05 / SKILLS (Two-column: Left = Prog Langs + ML/Data, Right = Frameworks/Tools) -->
+    <div class="section-row branch-left" id="section-skills">
       <div class="section-grid">
+        <!-- Left Column: Programming Languages & ML/Data -->
         <div class="card-column">
           <div class="card">
             <span class="section-label">05 / Skills</span>
             <h2 class="section-title">Instruments of <em>Inquiry</em></h2>
             <div class="card-body">
-              <div class="skills-section">
-                <h3 class="skills-category">Programming Languages</h3>
-                <p class="skills-items">Python, Java, C, HTML, CSS, JavaScript</p>
+              <div class="skills-col">
+                <div class="skill-box">
+                  <span class="skill-box-label">Programming Languages</span>
+                  <div class="skill-pills">
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">Java</span>
+                    <span class="skill-pill">C</span>
+                  </div>
+                </div>
+                <div class="skill-box">
+                  <span class="skill-box-label">ML / Data</span>
+                  <div class="skill-pills">
+                    <span class="skill-pill">NumPy</span>
+                    <span class="skill-pill">Pandas</span>
+                    <span class="skill-pill">Scikit-learn</span>
+                    <span class="skill-pill">Matplotlib</span>
+                    <span class="skill-pill">Seaborn</span>
+                    <span class="skill-pill">Sentence-BERT</span>
+                    <span class="skill-pill">EDA</span>
+                    <span class="skill-pill">Data Preprocessing</span>
+                    <span class="skill-pill">Feature Engineering</span>
+                    <span class="skill-pill">Model Evaluation</span>
+                    <span class="skill-pill">NLP</span>
+                  </div>
+                </div>
               </div>
-              <div class="skills-section">
-                <h3 class="skills-category">Libraries / Frameworks</h3>
-                <p class="skills-items">NumPy, Pandas, scikit-learn, Matplotlib, Seaborn</p>
-              </div>
-              <div class="skills-section">
-                <h3 class="skills-category">Tools / Platforms</h3>
-                <p class="skills-items">GitHub, VS Code, Figma, Jupyter, Google AI Studio, Firebase Hosting</p>
-              </div>
-              <div class="skills-section">
-                <h3 class="skills-category">Databases</h3>
-                <p class="skills-items">MySQL</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spacer Column (middle gutter) -->
+        <div class="gutter-spacer"></div>
+
+        <!-- Right Column: Frameworks / Tools -->
+        <div class="card-column about-timeline-column">
+          <div class="card timeline-container">
+            <div class="skills-col">
+              <div class="skill-box">
+                <span class="skill-box-label">Frameworks / Tools</span>
+                <div class="skill-pills">
+                  <span class="skill-pill">FastAPI</span>
+                  <span class="skill-pill">REST APIs</span>
+                  <span class="skill-pill">PaddleOCR</span>
+                  <span class="skill-pill">PyMuPDF</span>
+                  <span class="skill-pill">ReportLab</span>
+                  <span class="skill-pill">Git</span>
+                  <span class="skill-pill">GitHub</span>
+                  <span class="skill-pill">Jupyter Notebook</span>
+                  <span class="skill-pill">VS Code</span>
+                  <span class="skill-pill">GitHub Actions</span>
+                  <span class="skill-pill">Google AI Studio</span>
+                  <span class="skill-pill">Firebase</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1681,10 +1779,10 @@
           <div class="card contact-cards-container">
             
             <!-- Card 1 -->
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shankarsrivathsa@gmail.com&su=%5Bfrom%3A%20Portfolio%5D" target="_blank" rel="noopener noreferrer" class="contact-card-item">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shankarsrivathsa.07@gmail.com&su=%5Bfrom%3A%20Portfolio%5D" target="_blank" rel="noopener noreferrer" class="contact-card-item">
               <div class="contact-card-info">
                 <span class="contact-card-label">EMAIL ADDRESS</span>
-                <span class="contact-card-value">shankarsrivathsa@gmail.com</span>
+                <span class="contact-card-value">shankarsrivathsa.07@gmail.com</span>
               </div>
               <span class="contact-card-arrow">&rarr;</span>
             </a>
@@ -1706,6 +1804,18 @@
               </div>
               <span class="contact-card-arrow">&rarr;</span>
             </a>
+            
+            <!-- Card 4 (Easter Egg) -->
+            <div class="contact-card-item" style="cursor: default;">
+              <div class="contact-card-info">
+                <span class="contact-card-label">PORTFOLIO</span>
+                <span class="contact-card-value contact-pun-value">
+                  <span class="contact-pun-default">shankarsrivathsa.me</span>
+                  <span class="contact-pun-hover">breh...</span>
+                </span>
+              </div>
+              <span class="contact-card-arrow">&rarr;</span>
+            </div>
             
           </div>
         </div>
